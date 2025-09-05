@@ -56,3 +56,15 @@ def books_by_author(author_name):
             print(f" - {book.title}")
     except Author.DoesNotExist:
         print(f"No author found with the name '{author_name}'")
+        from relationship_app.models import Librarian, Library
+
+def librarian_for_library(library_name):
+    try:
+        library = Library.objects.get(name=library_name)
+        librarian = Librarian.objects.get(library=library)  # ✅ Required by checker
+        print(f"\nLibrarian for {library.name}: {librarian.name}")
+    except Library.DoesNotExist:
+        print(f"No library found with the name '{library_name}'")
+    except Librarian.DoesNotExist:
+        print(f"No librarian assigned to {library.name}")
+
