@@ -4,7 +4,9 @@ from .models import Library
 from django.shortcuts import render
 from django.views.generic.detail import DetailView
 from .models import Book, Library  # Import both Book and Library
-
+from django.contrib.auth.decorators import permission_required
+from django.shortcuts import render, redirect
+from .models import Book
 # Function-based view to list all books
 def list_books(request):
     books = Book.objects.all()
@@ -56,4 +58,17 @@ def librarian_view(request):
 def member_view(request):
     return render(request, 'relationship_app/member_view.html')
 
+@permission_required('relationship_app.can_add_book')
+def add_book(request):
+    # Your code for adding a book
+    pass
 
+@permission_required('relationship_app.can_change_book')
+def edit_book(request, book_id):
+    # Your code for editing a book
+    pass
+
+@permission_required('relationship_app.can_delete_book')
+def delete_book(request, book_id):
+    # Your code for deleting a book
+    pass
