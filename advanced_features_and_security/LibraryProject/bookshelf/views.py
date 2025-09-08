@@ -28,4 +28,18 @@ def delete_book(request, book_id):
 
 def book_list(request):
     books = Book.objects.all()
-    return render(request, 'bookshelf/book_list.html', {'books': books})
+    return render(request, 'bookshelf/book_list.html', {'books': books}) from django.shortcuts import render
+from .models import Book
+from .forms import BookSearchForm
+
+def book_search(request):
+    form = BookSearchForm(request.GET or None)
+    books = Book.objects.none()
+
+    if form.is_valid():
+        query = form.cleaned_data['query']
+        # ORM automatically escapes inputs, preventing SQL injection
+        books = Book.objects.filter(title__icontains=query)
+
+    return render(request, 'bookshelf/book_list.html', {'form': form, 'books': books})
+
