@@ -1,3 +1,5 @@
+# Tell Django to trust the 'X-Forwarded-Proto' header from the proxy for HTTPS detection
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent.parent
