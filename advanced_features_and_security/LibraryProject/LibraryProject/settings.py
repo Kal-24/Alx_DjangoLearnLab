@@ -76,3 +76,25 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # If using custom user model:
 # AUTH_USER_MODEL = 'bookshelf.CustomUser'
+# SECURITY WARNING: don't run with debug turned on in production!
+DEBUG = False  # Set to False in production
+
+ALLOWED_HOSTS = ['yourdomain.com', 'localhost', '127.0.0.1']  # Add your real domains here
+
+# Security middleware and settings
+SECURE_BROWSER_XSS_FILTER = True  # Enable browser's XSS filter
+SECURE_CONTENT_TYPE_NOSNIFF = True  # Prevent MIME sniffing
+X_FRAME_OPTIONS = 'DENY'  # Prevent clickjacking
+
+# Ensure cookies are only sent over HTTPS
+CSRF_COOKIE_SECURE = True
+SESSION_COOKIE_SECURE = True
+
+# Recommended: Redirect all HTTP traffic to HTTPS (requires SSL configured)
+SECURE_SSL_REDIRECT = True
+
+# Content Security Policy settings - add if using django-csp middleware
+# CSP_DEFAULT_SRC = ("'self'",)
+# CSP_SCRIPT_SRC = ("'self'", 'cdnjs.cloudflare.com',)
+# Add django-csp to installed apps and middleware if used
+
